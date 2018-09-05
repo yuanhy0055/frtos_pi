@@ -1,4 +1,4 @@
-TOOLCHAIN ?= arm-none-eabi-
+TOOLCHAIN ?= arm-linux-gnueabihf-
 
 SOURCES = Demo/main.c \
           Demo/startup.c \
