@@ -1,4 +1,4 @@
-TOOLCHAIN ?= arm-linux-gnueabihf-
+TOOLCHAIN ?= arm-none-eabi-
 
 SOURCES = Demo/main.c \
           Demo/startup.c \
@@ -39,27 +39,27 @@ build/%.o: %.s
 	mkdir -p $(dir $@)
 	$(TOOLCHAIN)as $(ASFLAGS) $< -o $@
 
-all: kernel7.list kernel7.img kernel7.syms kernel7.hex
-	$(TOOLCHAIN)size kernel7.elf
+all: kernel.list kernel.img kernel.syms kernel.hex
+	$(TOOLCHAIN)size kernel.elf
 
-kernel7.img: kernel7.elf
-	$(TOOLCHAIN)objcopy kernel7.elf -O binary $@
+kernel.img: kernel.elf
+	$(TOOLCHAIN)objcopy kernel.elf -O binary $@
 
-kernel7.list: kernel7.elf
-	$(TOOLCHAIN)objdump -D -S  kernel7.elf > $@
+kernel.list: kernel.elf
+	$(TOOLCHAIN)objdump -D -S  kernel.elf > $@
 
-kernel7.syms: kernel7.elf
-	$(TOOLCHAIN)objdump -t kernel7.elf > $@
+kernel.syms: kernel.elf
+	$(TOOLCHAIN)objdump -t kernel.elf > $@
 
-kernel7.hex : kernel7.elf
-	$(TOOLCHAIN)objcopy kernel7.elf -O ihex $@
+kernel.hex : kernel.elf
+	$(TOOLCHAIN)objcopy kernel.elf -O ihex $@
 
-kernel7.elf: $(OBJECTS)
-	$(TOOLCHAIN)ld $^ -static -Map kernel7.map -o $@ -T Demo/raspberrypi.ld
+kernel.elf: $(OBJECTS)
+	$(TOOLCHAIN)ld $^ -static -Map kernel.map -o $@ -T Demo/raspberrypi.ld
 
 clean:
 	rm -f $(OBJECTS)
-	rm -f kernel7.list kernel7.img kernel7.syms
-	rm -f kernel7.elf kernel7.hex kernel7.map 
+	rm -f kernel.list kernel.img kernel.syms
+	rm -f kernel.elf kernel.hex kernel.map
 	rm -rf build
 
