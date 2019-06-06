@@ -1,4 +1,5 @@
 # Object files
+*.obj
 
 # Precompiled Headers
 
@@ -9,3 +10,6 @@
 # Executables
 
 # Debug files
+[Dd]ebug/
+[Rr]elease/
+.vs/
